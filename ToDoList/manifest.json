@@ -1,0 +1,10 @@
+{
+    "manifest_version": 3,
+    "name": "To Do List",
+    "description": "A simple pop out to do list",
+    "version": "1.0",
+    "action": {
+      "default_popup": "popout.html",
+      "default_icon": "popup.png"
+    }
+  }
