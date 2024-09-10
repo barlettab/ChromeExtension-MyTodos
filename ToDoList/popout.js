@@ -1,6 +1,3 @@
-// create-todo <- create todo button on click open ".new-item"
-// new-item <- if button pressed it save & hide "new-item"
-
 document.addEventListener('DOMContentLoaded', function() {
     // Mostra a div "new-item" ao clicar no botão "create-todo"
     document.querySelector('.create-todo').addEventListener('click', function(){
@@ -10,16 +7,21 @@ document.addEventListener('DOMContentLoaded', function() {
     // Adiciona um novo item à lista ao clicar no botão de salvar
     document.querySelector('.new-item button').addEventListener('click', function(){
         var itemName = document.querySelector('.new-item input').value;
-        if (itemName != '') {
-            var items = localStorage.getItem('todo-items');
-            // Se não houver itens salvos, inicializa um array vazio
-            var itemsArr = items ? JSON.parse(items) : []; 
-            itemsArr.push({"item": itemName, "status": 0});
-            saveItems(itemsArr);
-            fetchItems();
-            document.querySelector('.new-item input').value = '';
-            document.querySelector('.new-item').style.display = 'none';
+        
+        // validação para garantir que o item não está vazio
+        if (itemName.trim() === '') {
+            alert('Ops! O item não pode estar vazio!');
+            return;
         }
+        
+        var items = localStorage.getItem('todo-items');
+        // Se não houver itens salvos, inicializa um array vazio
+        var itemsArr = items ? JSON.parse(items) : []; 
+        itemsArr.push({"item": itemName, "status": 0});
+        saveItems(itemsArr);
+        fetchItems();
+        document.querySelector('.new-item input').value = '';
+        document.querySelector('.new-item').style.display = 'none';
     });
 
     // Carrega os itens salvos no localStorage
@@ -37,7 +39,7 @@ function fetchItems() {
 
         for (var i = 0; i < itemsArr.length; i++) {
             var status = '';
-            if (itemsArr[i].status == 1) {
+            if (itemsArr[i].status === 1) {
                 status = 'class="done"';
             }
             newItemHTML += `<li data-itemindex="${i}" ${status}><span class="item">${itemsArr[i].item}</span><div><span class="itemComplete">✅</span><span class="itemDelete">🗑️</span></div></li>`;
@@ -58,16 +60,22 @@ function fetchItems() {
     } catch (e) {
         console.error("Erro ao carregar os itens:", e);
     }
+
 }
 
 function itemComplete(index) {
     var items = localStorage.getItem('todo-items'); 
     var itemsArr = items ? JSON.parse(items) : [];
 
-    itemsArr[index].status = 1;
-    saveItems(itemsArr);
+    // Verifica se o status é 0 e altera para 1, se estiver dentro dos limites permitidos
+    if (itemsArr[index].status === 0) {
+        itemsArr[index].status = 1;
+        saveItems(itemsArr);
 
-    document.querySelector('ul.todo-items li[data-itemindex="'+index+'"]').className = 'done';
+        document.querySelector('ul.todo-items li[data-itemindex="'+index+'"]').className = 'done';
+    } else {
+        console.error("Status inválido. Apenas 0 e 1 são permitidos.");
+    }
 }
 
 function itemDelete(index) {
@@ -80,6 +88,10 @@ function itemDelete(index) {
 }
 
 function saveItems(obj) {
-    var string = JSON.stringify(obj);
+    // Filtra os itens, garantindo que status seja apenas 0 ou 1
+    var filteredItems = obj.filter(item => item.item.trim() !== '' && (item.status === 0 || item.status === 1));
+
+    // Salva apenas os itens filtrados
+    var string = JSON.stringify(filteredItems);
     localStorage.setItem('todo-items', string);
 }
