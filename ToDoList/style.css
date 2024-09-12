@@ -1,0 +1,85 @@
+body {
+    width: 350px;
+    background-color: #f8f8f8;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #3a3a3a;
+    padding: 5px 15px 15px 15px;
+}
+
+.todo-items,
+.todo-items li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.todo-items li {
+    padding: 15px;
+    border-bottom: 1px solid #e5e5e5;
+    display: flex;
+    justify-content: space-between; /* Mantém os botões à direita e o texto à esquerda */
+    align-items: flex-start; /* Alinha o texto e os botões ao topo */
+    border-radius: 7px;
+    word-wrap: break-word;
+}
+
+.todo-items li.done .item {
+    text-decoration: line-through;
+    color: #999999;
+}
+
+.item {
+    flex-grow: 1; /* Faz o item de texto ocupar o espaço necessário */
+    margin-right: 10px; /* Espaço entre o texto e os botões */
+    word-break: break-word; /* Quebra o texto longo em novas linhas */
+}
+
+.todo-items div {
+    display: flex;
+    align-items: center;
+}
+
+.todo-items div span {
+    margin: 0 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background-color: #f0f0f0;
+}
+
+.new-item {
+    display: none;
+    padding: 20px 5px 10px;
+    border-radius: 5px;
+}
+
+.create-todo,
+.save-btn {
+    background-color: #f0f0f0;
+    border: none;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.create-todo:hover,
+.save-btn:hover {
+    background-color: #e0e0e0;
+}
+
+input[type="text"] {
+    width: auto;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #ccc;
+    border-radius: 24px;
+    box-shadow: none;
+    outline: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+
