@@ -1,6 +1,6 @@
 # ChromeExtension-ToDoList
 
-# To-Do List Application
+# To-Do List Application 🍉
 Este é um aplicativo de lista de tarefas desenvolvido como uma extensão do Google Chrome utilizando JavaScript. A extensão permite aos usuários adicionar, completar e excluir itens da lista de tarefas, com os dados sendo armazenados localmente no navegador para persistência.
 
 Este projeto foi baseado no tutorial [Coding Challenge 4 Extensions In 2 Hours - How to build a Chrome Extension], com melhorias na interface de usuário e na segurança.
