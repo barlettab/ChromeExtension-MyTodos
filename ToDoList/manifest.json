@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "To Do List",
+    "name": "My Todo's",
     "description": "A simple pop out to do list",
     "version": "1.0",
     "action": {
